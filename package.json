@@ -4,6 +4,8 @@
   "private": true,
   "dependencies": {
     "@babel/core": "7.9.0",
+    "@rmwc/button": "^7.0.3",
+    "@rmwc/grid": "^7.0.3",
     "@svgr/webpack": "4.3.3",
     "@testing-library/jest-dom": "^5.16.4",
     "@testing-library/react": "^11.2.7",
@@ -50,6 +52,7 @@
     "react-dom": "^16.14.0",
     "resolve": "1.15.0",
     "resolve-url-loader": "3.1.2",
+    "rmwc": "^6.1.4",
     "sass-loader": "8.0.2",
     "semver": "6.3.0",
     "style-loader": "0.23.1",
@@ -86,7 +89,8 @@
     ]
   },
   "devDependencies": {
-    "eslint": "6.6.0"
+    "eslint": "6.6.0",
+    "prettier": "2.6.2"
   },
   "jest": {
     "roots": [
