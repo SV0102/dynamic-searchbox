@@ -1,5 +1,6 @@
 import React from "react";
-import "./App.css";
+import "./components/App.css";
+
 import { Button } from "@rmwc/button";
 import { TextField } from "@rmwc/textfield";
 import { TabBar } from "@rmwc/tabs";
@@ -64,7 +65,7 @@ function App() {
 
       <Grid>
         <GridCell span={3}>
-          <p className={"filters"}>Filters         (All)</p>
+          <p className={"filters"}>Filters(All)</p>
           <Select
             enhanced
             options={["Europe", "Asia", "North America", "South America",
@@ -90,6 +91,15 @@ function App() {
             style={{ margin: "10px" }}
           />
           <br />
+        </GridCell>
+        <GridCell span={8}>
+          <main>
+            Here will be some applied filters
+            <br />
+            -------------------------
+            <br />
+            Results
+          </main>
         </GridCell>
         <GridCell span={8}>
           <main>
