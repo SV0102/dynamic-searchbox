@@ -7,6 +7,8 @@ import { Slider } from "@rmwc/slider";
 import { Select } from "@rmwc/select";
 import "@material/slider/dist/mdc.slider.css";
 import { TextField } from "@rmwc/textfield";
+import { Button } from "@rmwc/button";
+import { MenuSurfaceAnchor, Menu, MenuSurface, MenuItem } from "rmwc";
 
 import "@material/select/dist/mdc.select.css";
 import "@material/floating-label/dist/mdc.floating-label.css";
@@ -22,9 +24,12 @@ import "@material/textfield/dist/mdc.textfield.css";
 import "@material/floating-label/dist/mdc.floating-label.css";
 import "@material/notched-outline/dist/mdc.notched-outline.css";
 import "@material/line-ripple/dist/mdc.line-ripple.css";
-import { Button } from "@rmwc/button";
 
-function SearchRequest({renderedInfo1}) {
+import "@material/menu/dist/mdc.menu.css";
+import "@material/menu-surface/dist/mdc.menu-surface.css";
+import "@material/list/dist/mdc.list.css";
+
+function SearchRequest({ renderedInfo1 }) {
   return (
     <ul>
       {renderedInfo1.length === 0 ? (
@@ -45,6 +50,32 @@ function SearchRequest({renderedInfo1}) {
   );
 }
 
+function EnhancedMenu(props) {
+  const [isOpen, setIsOpen] = useState(false);
+  const [isClose, setIsClose] = useState(true);
+  return (
+    <>
+      <MenuSurfaceAnchor>
+        <MenuSurface
+          open={isOpen}
+          hoistToBody={false}
+          onSelect={() => console.log("Vasya")}
+          focusOnOpen={false}
+          fixed={false}
+        >
+          <TextField placeholder={"Enter your first value"} />
+          <TextField placeholder={"Enter your second value"} />
+          <br />
+          <Button onClick={() => setIsOpen(false)}>Close</Button>
+        </MenuSurface>
+        <Button raised onClick={() => setIsOpen(!isOpen)}>
+          I need more than five beer
+        </Button>
+      </MenuSurfaceAnchor>
+    </>
+  );
+}
+
 function MainArea(props) {
   const { tabs, activeTabIndex, searchRequest } = props;
   const [regionChoice, setRegionChoice] = useState(undefined);
@@ -58,14 +89,19 @@ function MainArea(props) {
     city: cityChoice,
     street: streetChoiceTrans,
     beer_quantity: beerAmount,
-  }
-  let renderedInfo = [renderedObject.request, renderedObject.region,
-    renderedObject.city, renderedObject.street, renderedObject.beer_quantity];
+  };
+  let renderedInfo = [
+    renderedObject.request,
+    renderedObject.region,
+    renderedObject.city,
+    renderedObject.street,
+    renderedObject.beer_quantity,
+  ];
   let renderedInfo1 = renderedInfo.filter(
     (element) => element !== undefined && element.length !== 0
   );
 
-  function clearFilters(){
+  function clearFilters() {
     setRegionChoice(undefined);
     setCityChoice(undefined);
     setStreetChoice(undefined);
@@ -74,14 +110,13 @@ function MainArea(props) {
 
   function saveRequest() {
     let resultedText;
-    if (renderedInfo1 === undefined || renderedInfo1.length !== 0){
-      resultedText =
-        renderedInfo1
-          .map((element) => element)
-          .toString()
-          .replace(/,/g, "\n");}
-    else{
-      resultedText = "Empty request"
+    if (renderedInfo1 === undefined || renderedInfo1.length !== 0) {
+      resultedText = renderedInfo1
+        .map((element) => element)
+        .toString()
+        .replace(/,/g, "\n");
+    } else {
+      resultedText = "Empty request";
     }
     // console.log(this.state.items.length);
     let blob = new Blob([resultedText], { type: "text/plain;charset=utf-8" });
@@ -92,9 +127,9 @@ function MainArea(props) {
     element.click();
   }
 
-  function requestDemonstration(){
-    return JSON.stringify(renderedObject, undefined, "\n")
-  }
+  // function requestDemonstration() {
+  //   return JSON.stringify(renderedObject, undefined, "\n");
+  // }
 
   return (
     <>
@@ -104,11 +139,7 @@ function MainArea(props) {
           <Select
             onChange={(evt) => setRegionChoice(evt.detail.value)}
             enhanced
-            options={[
-              "Prague",
-              "Brno",
-              "Olomouc",
-            ]}
+            options={["Prague", "Brno", "Olomouc"]}
             placeholder={"Choose region"}
             style={{ margin: 10, width: "35rem" }}
           />
@@ -119,40 +150,49 @@ function MainArea(props) {
             onChange={(evt) => setCityChoice(evt.detail.value)}
           />
           <br />
-          <TextField placeholder={"Enter the street"}
-          onChange={evt => setStreetChoice(evt.target.value)}
-          onKeyPress={evt => evt.key === 'Enter'?
-          setStreetChoiceTrans(streetChoice) : setStreetChoiceTrans(undefined)}
+          <TextField
+            placeholder={"Enter the street"}
+            onChange={(evt) => setStreetChoice(evt.target.value)}
+            onKeyPress={(evt) =>
+              evt.key === "Enter"
+                ? setStreetChoiceTrans(streetChoice)
+                : setStreetChoiceTrans(undefined)
+            }
           />
           <br />
-          <br/>
+          <br />
           How much beer would you like to have?
-          <Slider discrete min={1} max={5} step={1}
-          onChange={element => setBeerAmount(element.target.value)}/>
-          <br/>
-          <Button>I want more than five beer</Button>
-          <br/>
+          <Slider
+            discrete
+            min={1}
+            max={5}
+            step={1}
+            onChange={(element) => setBeerAmount(element.target.value)}
+          />
+          <br />
+          <EnhancedMenu />
+          <br />
           <Button onClick={() => clearFilters()}>Clear filters</Button>
         </GridCell>
         <GridCell span={8}>
           <main>
-            <SearchRequest
-              renderedInfo1={renderedInfo1}
-            />
+            <SearchRequest renderedInfo1={renderedInfo1} />
             <Button
               onClick={() => {
                 console.log(JSON.stringify(renderedObject, undefined, "\n"));
-              }
-            }
-            >Push the search request</Button>
-            <br/>
+              }}
+            >
+              Push the search request
+            </Button>
+            <br />
             <Button
               onClick={() => {
-                saveRequest()
-                alert('Search request was sent')
-              }
-            }
-            >Save the search request</Button>
+                saveRequest();
+                alert("Search request was sent");
+              }}
+            >
+              Save the search request
+            </Button>
           </main>
         </GridCell>
       </Grid>
