@@ -10,3 +10,7 @@
 .filters {
   background-color: dodgerblue;
 }
+
+.filtersMarkUp .mdc-select{
+  margin: 10px;
+}

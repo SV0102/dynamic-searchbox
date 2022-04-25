@@ -1,9 +1,7 @@
 import React from "react";
 
-import { TabBar } from "@rmwc/tabs";
-import { Tab } from "@rmwc/tabs";
-import { Grid } from "@rmwc/grid";
-import { GridCell } from "@rmwc/grid";
+import {Tab, TabBar} from "@rmwc/tabs";
+import {Grid, GridCell} from "@rmwc/grid";
 
 import "./App.css";
 
@@ -14,15 +12,23 @@ import "@material/tab/dist/mdc.tab.css";
 import "@material/tab-scroller/dist/mdc.tab-scroller.css";
 import "@material/tab-indicator/dist/mdc.tab-indicator.css";
 
-function TabSelect() {
+function TabSelect(props) {
+
+  function tabBarHandling() {
+    console.log(props)
+    // if (props.key === "All"){
+    //   console.log('Petya!');
+    // }else{
+    //   console.log('Vasya!');
+    // }
+
+  }
+  const {tabs,setActiveTabIndex}=props;
   return <>
     <Grid>
       <GridCell span={6}>
-        <TabBar>
-          <Tab>All</Tab>
-          <Tab>Contacts</Tab>
-          <Tab>Clauses</Tab>
-          <Tab>Areas</Tab>
+        <TabBar onActivate={(event) => setActiveTabIndex(event.detail.index)}>
+          {tabs.map(tab => <Tab key={tab}>{tab}</Tab>)}
         </TabBar>
       </GridCell>
       <GridCell></GridCell>

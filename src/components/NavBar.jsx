@@ -1,4 +1,4 @@
-import React from "react";
+import React,{useState} from "react";
 import "./App.css";
 
 import { Button } from "@rmwc/button";
@@ -12,7 +12,14 @@ import "@material/floating-label/dist/mdc.floating-label.css";
 import "@material/notched-outline/dist/mdc.notched-outline.css";
 import "@material/line-ripple/dist/mdc.line-ripple.css";
 
-function NavBar() {
+function NavBar(props) {
+  const[searchFieldVal, setSearchFieldVal] = useState();
+  const {searchRequest, setSearchRequest} = props;
+  // console.log(searchRequest);
+  // function saveInfo() {
+  //   setSearchRequest(searchFieldVal);
+  // }
+
   return <>
       <nav className={"navy_nav"}>
       <TextField
@@ -22,8 +29,15 @@ function NavBar() {
           background: "white",
           margin: 15,
         }}
+        onKeyPress={event => {
+          if (event.key === "Enter"){
+            setSearchRequest(searchFieldVal)
+          }
+        }}
+        onChange={(event) => setSearchFieldVal(event.target.value)}
+
       />
-      <Button raised>Search</Button>
+      <Button raised onClick={() => setSearchRequest(searchFieldVal)}>Search</Button>
     </nav>
     </>
 }

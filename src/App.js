@@ -101,15 +101,6 @@ function App() {
             Results
           </main>
         </GridCell>
-        <GridCell span={8}>
-          <main>
-            Here will be some applied filters
-            <br />
-            -------------------------
-            <br />
-            Results
-          </main>
-        </GridCell>
       </Grid>
     </>
   );

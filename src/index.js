@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import ReactDOM from 'react-dom';
 import Header from './components/Header';
 import NavBar from "./components/NavBar";
@@ -9,13 +9,16 @@ import reportWebVitals from './reportWebVitals';
 import MainArea from "./components/MainArea";
 
 function Main(){
+  const[activeTabIndex, setActiveTabIndex] = useState('All');
+  const tabs = ['All', 'Contacts', 'Clauses', 'Areas'];
+  const [searchRequest, setSearchRequest] = useState('');
+  // console.log(searchRequest);
   return <>
     <Header/>
-    <NavBar/>
-    <TabSelect/>
-    <MainArea/>
-
-
+    <NavBar setSearchRequest={setSearchRequest}/>
+    <TabSelect setActiveTabIndex={setActiveTabIndex} tabs={tabs}/>
+    <MainArea activeTabIndex={activeTabIndex} tabs={tabs}
+    searchRequest={searchRequest}/>
   </>
 }
 
