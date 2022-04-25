@@ -52,15 +52,12 @@ function SearchRequest({ renderedInfo1 }) {
 
 function EnhancedMenu(props) {
   const [isOpen, setIsOpen] = useState(false);
-  const [isClose, setIsClose] = useState(true);
   return (
     <>
       <MenuSurfaceAnchor>
         <MenuSurface
           open={isOpen}
-          hoistToBody={false}
           onSelect={() => console.log("Vasya")}
-          focusOnOpen={false}
           fixed={false}
         >
           <TextField placeholder={"Enter your first value"} />
