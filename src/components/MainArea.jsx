@@ -55,10 +55,7 @@ function EnhancedMenu(props) {
   return (
     <>
       <MenuSurfaceAnchor>
-        <MenuSurface
-          open={isOpen}
-          fixed={false}
-        >
+        <MenuSurface open={isOpen} fixed={false}>
           <TextField placeholder={"Enter your first value"} />
           <TextField placeholder={"Enter your second value"} />
           <br />
@@ -114,7 +111,6 @@ function MainArea(props) {
     } else {
       resultedText = "Empty request";
     }
-    // console.log(this.state.items.length);
     let blob = new Blob([resultedText], { type: "text/plain;charset=utf-8" });
     const element = document.createElement("a");
     element.href = URL.createObjectURL(blob);
@@ -122,10 +118,6 @@ function MainArea(props) {
     document.body.appendChild(element); // Required for this to work in FireFox
     element.click();
   }
-
-  // function requestDemonstration() {
-  //   return JSON.stringify(renderedObject, undefined, "\n");
-  // }
 
   return (
     <>
