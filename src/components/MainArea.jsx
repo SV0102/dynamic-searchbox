@@ -57,7 +57,6 @@ function EnhancedMenu(props) {
       <MenuSurfaceAnchor>
         <MenuSurface
           open={isOpen}
-          onSelect={() => console.log("Vasya")}
           fixed={false}
         >
           <TextField placeholder={"Enter your first value"} />
