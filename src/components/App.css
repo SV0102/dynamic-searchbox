@@ -1,0 +1,16 @@
+.navy_nav {
+  background-color: dodgerblue;
+  color: lightgoldenrodyellow;
+}
+
+.text_field {
+  color: lightgoldenrodyellow;
+}
+
+.filters {
+  background-color: dodgerblue;
+}
+
+.filtersMarkUp .mdc-select{
+  margin: 10px;
+}
