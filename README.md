@@ -1,3 +1,8 @@
+Very small description:
+This is my training project, which illustrated work with React 16, RMWC 6 (custom library for Material UI).
+This project includes several elements, which are commonly used for the search boxes of web services
+
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
